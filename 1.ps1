@@ -43,8 +43,8 @@ function Show-Menu {
             }
             "4" {
                 Write-Host "Exiting..." -ForegroundColor Yellow
-                del /S /F /Q "c:\windows\temp\*.*"
-                Start-Sleep -Seconds 20
+                Get-ChildItem "C:\Windows\Temp","$env:TEMP" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+                Start-Sleep -Seconds 10
                 exit & cls
             }
             default {
