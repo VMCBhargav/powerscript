@@ -22,7 +22,7 @@ function Show-Menu {
             }
             "2" {
                 try {
-                    irm https://christitus.com/win | iex
+                     Start-Process "powershell iwr -useb https://christitus.com/win | iex"
                 } catch {
                     Write-Host "Please run it manually" -ForegroundColor Red
                     echo "irm https://christitus.com/win | iex" | clip
