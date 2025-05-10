@@ -4,7 +4,7 @@ function Show-Menu {
     while ($true) {
         Clear-Host
         Write-Host "Internet is ON." -ForegroundColor Green
-        Write-Host "====== MENU ======" -ForegroundColor Cyan
+        Write-Host "====== MENU1 ======" -ForegroundColor Cyan
         Write-Host "1. MAS_AIO SCRIPT"
         Write-Host "2. Chris titus script"
         Write-Host "3. VMC Script"
