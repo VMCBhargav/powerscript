@@ -15,7 +15,7 @@ function Show-Menu {
 
         switch ($choice) {
             "1" {
-                Start-Process "control"
+                Start-Process "irm https://get.activated.win | iex"
                 Start-Sleep -Seconds 2
             }
             "2" {
