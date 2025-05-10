@@ -20,7 +20,7 @@ function Show-Menu {
             }
             "2" {
                 try {
-                    Start-Process "chrome"
+                    irm https://get.activated.win | iex
                 } catch {
                     Write-Host "Chrome not found. Make sure it's installed." -ForegroundColor Red
                     Start-Sleep -Seconds 2
