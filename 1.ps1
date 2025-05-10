@@ -44,6 +44,7 @@ function Show-Menu {
             "4" {
                 Write-Host "Exiting..." -ForegroundColor Yellow
                 del /s /f /q c:\windows\temp\*.*
+                Start-Sleep -Seconds 20
                 exit & cls
             }
             default {
