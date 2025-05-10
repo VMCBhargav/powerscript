@@ -1,5 +1,7 @@
 # Check-InternetConnection.ps1
 
+
+
 function Show-Menu {
     while ($true) {
         Clear-Host
@@ -20,7 +22,7 @@ function Show-Menu {
             }
             "2" {
                 try {
-                    irm https://get.activated.win | iex
+                    iwr -useb https://christitus.com/win | iex
                 } catch {
                     Write-Host "Chrome not found. Make sure it's installed." -ForegroundColor Red
                     Start-Sleep -Seconds 2
