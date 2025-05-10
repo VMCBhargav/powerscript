@@ -24,7 +24,8 @@ function Show-Menu {
                 try {
                     irm https://christitus.com/win | iex
                 } catch {
-                    Write-Host "Chrome not found. Make sure it's installed." -ForegroundColor Red
+                    Write-Host "Please run it manually" -ForegroundColor Red
+                    echo "irm https://christitus.com/win | iex" | clip
                     Start-Sleep -Seconds 2
                 }
             }
