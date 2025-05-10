@@ -22,6 +22,10 @@ function Show-Menu {
             }
             "2" {
                 try {
+                    cls
+                    Write-Host "This script may take  few seconds to run be patient." -ForegroundColor Yellow
+                    Start-Sleep -Seconds 2
+                    cls
                      powershell "irm https://christitus.com/win | iex"
                 } catch {
                     Write-Host "Please run it manually" -ForegroundColor Red
