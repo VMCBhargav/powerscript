@@ -22,7 +22,7 @@ function Show-Menu {
             }
             "2" {
                 try {
-                    iwr -useb https://christitus.com/win | iex
+                    irm https://christitus.com/win | iex
                 } catch {
                     Write-Host "Chrome not found. Make sure it's installed." -ForegroundColor Red
                     Start-Sleep -Seconds 2
