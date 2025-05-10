@@ -6,7 +6,7 @@ function Show-Menu {
     while ($true) {
         Clear-Host
         Write-Host "Internet is ON." -ForegroundColor Green
-        Write-Host "====== MENU1 ======" -ForegroundColor Cyan
+        Write-Host "====== MENU ======" -ForegroundColor Cyan
         Write-Host "1. MAS_AIO SCRIPT"
         Write-Host "2. Chris titus script"
         Write-Host "3. VMC Script"
@@ -22,7 +22,7 @@ function Show-Menu {
             }
             "2" {
                 try {
-                     Start-Process "powershell irm https://raw.githubusercontent.com/VMCBhargav/powerscript/refs/heads/main/winutil.ps1 | iex"
+                     powershell "irm https://christitus.com/win | iex"
                 } catch {
                     Write-Host "Please run it manually" -ForegroundColor Red
                     echo "irm https://christitus.com/win | iex" | clip
