@@ -6,7 +6,7 @@ function Show-Menu {
     while ($true) {
         Clear-Host
         Write-Host "Internet is ON." -ForegroundColor Green
-        Write-Host "====== MENU Chris ======" -ForegroundColor Cyan
+        Write-Host "====== MENU ======" -ForegroundColor Cyan
         Write-Host "1. MAS_AIO SCRIPT"
         Write-Host "2. Chris titus script"
         Write-Host "3. VMC Script"
@@ -43,7 +43,7 @@ function Show-Menu {
             }
             "4" {
                 Write-Host "Exiting..." -ForegroundColor Yellow
-                del /s /f /q c:\windows\temp\*.*
+                del /S /F /Q "c:\windows\temp\*.*"
                 Start-Sleep -Seconds 20
                 exit & cls
             }
