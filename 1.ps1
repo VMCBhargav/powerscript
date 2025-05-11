@@ -42,7 +42,7 @@ $button2.Size = New-Object System.Drawing.Size(300,40)
 $button2.Add_Click({ Run-ChrisTitus })
 
 $button3 = New-Object System.Windows.Forms.Button
-$button3.Text = "3. VMC Script (Open Edge)"
+$button3.Text = "3. Windows 11 Debloater"
 $button3.Location = New-Object System.Drawing.Point(50,130)
 $button3.Size = New-Object System.Drawing.Size(300,40)
 $button3.Add_Click({ Open-Edge })
