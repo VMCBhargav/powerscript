@@ -1,68 +1,67 @@
-# Check-InternetConnection.ps1
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
 
+function Check-Internet {
+    return Test-Connection -ComputerName 8.8.8.8 -Count 2 -Quiet
+}
 
+function Run-MAS_AIO {
+    Start-Process powershell -ArgumentList "-Command irm https://get.activated.win | iex"
+}
 
-function Show-Menu {
-    while ($true) {
-        Clear-Host
-        Write-Host "Internet is ON." -ForegroundColor Green
-        cls
-        Write-Host "====== MENU ======" -ForegroundColor Cyan
-        Write-Host "1. MAS_AIO SCRIPT"
-        Write-Host "2. Chris titus script"
-        Write-Host "3. VMC Script"
-        Write-Host "4. Exit"
-        Write-Host ""
+function Run-ChrisTitus {
+    Start-Process powershell -ArgumentList "-Command irm https://christitus.com/win | iex"
+}
 
-        $choice = Read-Host "Enter your choice (1-4)"
-
-        switch ($choice) {
-            "1" {
-                irm https://get.activated.win | iex
-                Start-Sleep -Seconds 2
-            }
-            "2" {
-                try {
-                    cls
-                    Write-Host "This script may take  few seconds to run be patient." -ForegroundColor Yellow
-                    Start-Sleep -Seconds 2
-                    cls
-                     powershell "irm https://christitus.com/win | iex"
-                } catch {
-                    Write-Host "Please run it manually" -ForegroundColor Red
-                    echo "irm https://christitus.com/win | iex" | clip
-                    Start-Sleep -Seconds 2
-                }
-            }
-            "3" {
-                try {
-                    Start-Process "msedge"
-                } catch {
-                    Write-Host "Microsoft Edge not found. Make sure it's installed." -ForegroundColor Red
-                    Start-Sleep -Seconds 2
-                }
-            }
-            "4" {
-                Write-Host "Exiting..." -ForegroundColor Yellow
-                Get-ChildItem "C:\Windows\Temp","$env:TEMP" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
-                Start-Sleep -Seconds 10
-                exit & cls
-            }
-            default {
-                Write-Host "Invalid choice. Please try again." -ForegroundColor Red
-                Start-Sleep -Seconds 2
-            }
-        }
+function Open-Edge {
+    try {
+        Start-Process "msedge"
+    } catch {
+        [System.Windows.Forms.MessageBox]::Show("Microsoft Edge not found.")
     }
 }
 
-# Check Internet connection
-$hostToPing = "8.8.8.8"
-$pingResult = Test-Connection -ComputerName $hostToPing -Count 2 -Quiet
+function Cleanup-And-Exit {
+    Get-ChildItem "C:\Windows\Temp","$env:TEMP" -Recurse -Force -ErrorAction SilentlyContinue | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    $form.Close()
+}
 
-if ($pingResult) {
-    Show-Menu
+# Create Form
+$form = New-Object System.Windows.Forms.Form
+$form.Text = "Internet Check Menu"
+$form.Size = New-Object System.Drawing.Size(400,300)
+$form.StartPosition = "CenterScreen"
+
+# Create Buttons
+$button1 = New-Object System.Windows.Forms.Button
+$button1.Text = "1. MAS_AIO Script"
+$button1.Location = New-Object System.Drawing.Point(50,30)
+$button1.Size = New-Object System.Drawing.Size(300,40)
+$button1.Add_Click({ Run-MAS_AIO })
+
+$button2 = New-Object System.Windows.Forms.Button
+$button2.Text = "2. Chris Titus Script"
+$button2.Location = New-Object System.Drawing.Point(50,80)
+$button2.Size = New-Object System.Drawing.Size(300,40)
+$button2.Add_Click({ Run-ChrisTitus })
+
+$button3 = New-Object System.Windows.Forms.Button
+$button3.Text = "3. VMC Script (Open Edge)"
+$button3.Location = New-Object System.Drawing.Point(50,130)
+$button3.Size = New-Object System.Drawing.Size(300,40)
+$button3.Add_Click({ Open-Edge })
+
+$button4 = New-Object System.Windows.Forms.Button
+$button4.Text = "4. Exit and Clean Temp"
+$button4.Location = New-Object System.Drawing.Point(50,180)
+$button4.Size = New-Object System.Drawing.Size(300,40)
+$button4.Add_Click({ Cleanup-And-Exit })
+
+# Check Internet
+if (Check-Internet) {
+    $form.Controls.AddRange(@($button1, $button2, $button3, $button4))
+    [System.Windows.Forms.Application]::Run($form)
 } else {
-    Write-Host "Internet is OFF. Opening Network Connections..." -ForegroundColor Red
+    [System.Windows.Forms.MessageBox]::Show("Internet is OFF. Opening Network Settings...", "Connection Error", "OK", "Error")
     Start-Process "ncpa.cpl"
 }
