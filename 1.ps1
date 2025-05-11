@@ -28,7 +28,7 @@ function Cleanup-And-Exit {
 
 # Create Form
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Internet Check Menu"
+$form.Text = "Bhargav's Script Menu"
 $form.Size = New-Object System.Drawing.Size(400,300)
 $form.StartPosition = "CenterScreen"
 
